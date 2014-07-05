@@ -1,0 +1,16 @@
+#jekyll
+_site/*
+
+# vim.gitignore
+*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# linux.gitignore
+.*
+!.gitignore
+
+# python.gitignore
+*.py[cod]
