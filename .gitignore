@@ -1,5 +1,7 @@
 #jekyll
 _site/*
+assets/photo/*
+assets/css/icomoon/*
 
 # vim.gitignore
 *.s[a-w][a-z]

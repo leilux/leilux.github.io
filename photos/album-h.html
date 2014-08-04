@@ -1,0 +1,39 @@
+---
+layout: album
+title: Album-h
+page: image
+hor: active
+return_text: 回新版
+return_url: ./album.html
+---
+
+<script type="text/javascript">
+  $(document).ready(function(){imagesLoaded($('.box')[0], function() {
+      var $container = $('.box');
+      // hor
+      var wall = new freewall('.box');
+      wall.reset({
+        selector: '.brick',
+        //draggable: true,
+        cellW: 'auto',
+        cellH: 162,
+        animate: false,
+        onResize: h_onresize,
+      });
+      function h_onresize(e) {
+        wall.fitWidth();
+        console.info('h');
+      }
+      function layout_h () {
+        wall.fitWidth();
+      }
+      // layout hor
+      $('#hor').on('click', function(e) {
+        layout_h();
+      });
+
+      layout_h();
+
+  }); // imagesLoaded
+  });// document on ready
+</script>

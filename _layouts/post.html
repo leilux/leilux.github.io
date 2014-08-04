@@ -1,0 +1,77 @@
+<html lang="zh-CN" slick-uniqueid="3"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> {{page.title}} | {{site.title}}</title>
+  <link rel="stylesheet" href="/assets/css/typo.css">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+</head>
+<body>
+<!-- article 
+     ======= -->
+<div class="container typo">
+  <div id="article" class="article">
+    <!-- pages -->
+    <div id="pageless-wrap">
+      <h1 class="title">{{ page.title }}</h1>
+      <div class='article-info'>Post on <span class="icon-clock-o">{{ page.date|date:"%Y-%m-%d" }}</span></div>
+      <div class="content page" id="page1">
+        <div class="ft"> 1 </div>
+         {{ content }}
+      </div><!-- /.content page -->
+    </div><!-- pageless-wrap -->
+  </div><!-- /.article -->
+  <!-- prev & next post -->
+  <div class='article-nav'>
+    {% if page.previous.url %}
+    <a class='before' href="{{page.previous.url | replace: '+','%20'}}">
+      <span class="icon-chevron-left"> {{page.previous.title}}</span> 
+    </a>
+    {% endif %}
+    {% if page.next.url %}
+    <a class='after' href="{{page.next.url | replace: '+','%20'}}">
+      {{page.next.title}} <span class="icon-chevron-right"></span>
+    </a>
+    {% endif %}
+  </div>
+  <!-- share and comment -->
+  <div id="disqus_container">
+    <a href="#" class="comment" onclick="return false;">点击查看评论</a>
+    <div id="disqus_thread"></div>
+  </div>
+</div><!-- /.container typo -->
+
+<!-- go to top -->
+<a class='gotop' href="#"><span class='icon-arrow-circle-up'></span></a>
+
+<script type="text/javascript" src='/assets/js/jquery-1.9.1.min.js'></script>
+
+<!-- url-list-pane 
+     ============= -->
+<a href="javascript:void(0);" class="show-pane">&gt;</a>
+<div class="url-list-pane off">
+  <div class='side-nav'><div class='vertical-middle'>
+    <ul class='navbar'>
+      <li id='close'><span class="icon-times-circle-o"></span></li>
+      <li><span class="icon-quill"></span><a href='/blog'>blog</a></li>
+      <li><span class="icon-camera"></span><a href='/photos'>image</a></li>
+      <li><span class="icon-lab"></span><a href='/lab'>lab</a></li>
+      <li><span class="icon-drawer"></span><a href='/lou'>篓</a></li>
+    </ul>
+  </div></div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+      // show  pane
+      $('.show-pane').on('click', function() {
+          $('.url-list-pane').removeClass('off').addClass('on');
+      });
+      // close pane
+      $('#close').on('click', function() {
+          $('.url-list-pane').removeClass('on').addClass('off');
+      });
+  });
+</script>
+
+</body>
+</html>

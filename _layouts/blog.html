@@ -1,0 +1,27 @@
+---
+layout: page
+title: Blog
+page: blog
+logo: quill
+---
+
+<div class="section">
+  <div class="page-title">
+    <ul class="navigation clearfix">
+      <li><a>leilux · Blog</a></li>
+      <li class="search"><input class='search-query' type="text" placeholder="搜索" />
+      </li>
+    </ul>
+  </div>
+  <ul class="article-list">
+  {% for post in site.posts %}
+    <li>
+      <h2><a href="{{ post.url|replace: '+','%20' }}">{{ post.title }}</a></h2>
+      <div class="title-desc">{{ post.content | split:'<!--more-->'|first|strip_html}}</div>
+      <div class="article-info">
+        <span class="icon-clock-o"></span><span class='time'>{{ post.date|date:"%Y-%m-%d" }}</span><span class='categories'>{{ post.categorire }}</span>
+      </div>
+    </li>
+  {% endfor %}
+  </ul>
+</div><!-- /.section -->

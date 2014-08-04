@@ -1,0 +1,13 @@
+auto: true
+
+markdown: rdiscount
+pygments: true
+paginate: 8
+permalink: /:categories/:title
+
+excerpt_separator: <!--more-->
+
+# global vars
+title: Leilux
+url: xpx.droprest.com
+

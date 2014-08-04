@@ -1,0 +1,219 @@
+body {
+  margin: 0px;
+}
+.header {
+  padding-bottom: 20px;
+  height: 100px;
+}
+.danlv {
+  background-color: #2B9646;
+}
+.header h1 {
+  margin-bottom: 10px;
+  text-align: center;
+  color: white;
+}
+.ft {
+  position: absolute;
+  width: 32px;
+  height: 20px;
+  top: 0px;
+  left: -36px;
+  font-size: 10px;
+  text-align: center;
+  background: #d1d0c8
+}
+.container {
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 700px;
+}
+.content img {
+  display: block;
+  max-width: 100%;
+}
+.article h1.title {
+  font-family: Georgia,"Times New Roman",Times,"Kai","Kaiti SC","KaiTi","BiauKai","楷体","楷体_GB2312",serif;
+  font-weight: 700;
+  font-size: 39px;
+  text-align: center;
+}
+.page {
+  position: relative;
+}
+.footer {
+  color: #2B9646;
+}
+.gotop {
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+  color: black;
+  font-size: 30px;
+  opacity: 0.7;
+}
+
+/* Responsive *\
+\* ========== */
+@media (max-width: 767px) {
+  .search-box {
+    width: 80%;
+  }
+  .container {
+    width: auto;
+  }
+  div.search {
+    width: auto;
+  }
+  .article h1.title {
+    font-size: 32px;
+  }
+  .ft {
+    position: relative;
+    left: 0px;
+  }
+}
+/* article */
+.typo a, a {
+  text-decoration: none;
+  border-bottom: none;
+}
+.article-info {
+  font-size: 13px;
+  color: #999999;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1.2em;
+  margin-bottom: 2.2em;
+}
+.content img {
+  margin: 0px auto;
+}
+.article-nav {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding-top: 1.2em;
+  padding-bottom: 2.2em;
+  margin-bottom: 2.2em;
+  margin-top: 2.2em;
+  font: 13px tahoma,arial,宋体;
+}
+.article-nav > .before {
+  float: left;
+  font-size: 14px;
+}
+.article-nav > .after {
+  float: right;
+  font-size: 14px;
+}
+/* url list pane */
+.url-list-pane {
+  position: fixed;
+  height: 100%;
+  top: 0px;
+  left: -120px;
+  background-color: black;
+  z-index: 1000;
+  opacity: 0.9;
+  -webkit-transition: 0.4s all ease-in-out;
+     -moz-transition: 0.4s all ease-in-out;
+      -ms-transition: 0.4s all ease-in-out;
+       -o-transition: 0.4s all ease-in-out;
+          transition: 0.4s all ease-in-out;
+}
+.on {
+  -webkit-transform:translate(120px, 0px);
+     -moz-transform:translate(120px, 0px);
+      -ms-transform:translate(120px, 0px);
+       -o-transform:translate(120px, 0px);
+          transform:translate(120px, 0px);
+  /*left: 0px;*/
+}
+.off {
+  -webkit-transform:translate(0px, 0px);
+     -moz-transform:translate(0px, 0px);
+      -ms-transform:translate(0px, 0px);
+       -o-transform:translate(0px, 0px);
+          transform:translate(0px, 0px);
+  /*left: -150px;*/
+}
+#close {
+  text-align: right;
+  cursor: pointer;
+  font-size: 16px;
+  color: #FF5951;
+  font-weight: bold;
+  padding: 0px;
+}
+#close:hover {
+  color: red;
+}
+#close span {
+  margin-right: 5px;
+}
+.show-pane {
+  position: fixed;
+  width: 40px;
+  top: 50%;
+  margin-top: -50px;
+  left: -35px;
+  background-color: black;
+  color: #fff;
+  text-align: right;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 20px 5px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  z-index: 900;
+  -webkit-transition:all 0.2s ease-in-out !important;
+     -moz-transition:all 0.2s ease-in-out !important;
+      -ms-transition:all 0.2s ease-in-out !important;
+       -o-transition:all 0.2s ease-in-out !important;
+          transition:all 0.2s ease-in-out !important;
+  opacity: 0.7;
+}
+.show-pane:hover {
+  text-decoration: none;
+  left: -20px;
+}
+
+.side-nav {
+  display:table; 
+  /*background-color:#C2300B;*/
+  width: 100%; 
+  height: 100%; 
+  overflow:hidden; 
+  _position:relative; 
+}
+.vertical-middle { 
+  vertical-align:middle; 
+  display:table-cell; 
+  text-align:center; 
+  _position:absolute; 
+  _top:50%; 
+  _left:50%; 
+}
+.navbar {
+  background-color: black; 
+  color:#fff; 
+  display:inline-block; 
+  _position:relative; 
+  _top:-50%; 
+  _left:-50%; 
+  border-radius: 5px;
+}
+.navbar > li {
+  font: 16px "微软雅黑","Arial","Helvetica","sans-serif";
+  text-align: left;
+  padding: 7px 15px;
+  padding-left: 15px;
+  border-left: 5px solid white;
+}
+.navbar span {
+  margin-right: 10px;
+}
