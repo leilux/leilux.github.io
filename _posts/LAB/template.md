@@ -1,6 +1,6 @@
 ---
 layout: post
-category: 
+category: LAB
 name: 
 thumbnail: 
 progress: 

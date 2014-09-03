@@ -17,7 +17,7 @@ logo: quill
   {% for post in site.posts %}
     <li>
       <h2><a href="{{ post.url|replace: '+','%20' }}">{{ post.title }}</a></h2>
-      <div class="title-desc">{{ post.content | split:'<!--more-->'|first|strip_html}}</div>
+      <div class="title-desc">{{ post.content | split:'<!--more-->'|first|strip_html}}<a href="{{ post.url|replace: '+','%20' }}"> ...</a></div>
       <div class="article-info">
         <span class="icon-clock-o"></span><span class='time'>{{ post.date|date:"%Y-%m-%d" }}</span><span class='categories'>{{ post.categorire }}</span>
       </div>
