@@ -650,12 +650,15 @@ padding-top: 23px;
 }
 @media (max-width: 767px) {
   .app-win {
-  width: 90%;
-}
+    width: 90%;
+  }
   .expand_action {
     width:100%;
     height: 100%;
     margin-top:0px;
+  }
+  ul.article-list {
+    padding-left: 30px;
   }
 }
 
