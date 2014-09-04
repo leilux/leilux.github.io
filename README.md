@@ -12,15 +12,18 @@ leilux.github.io
 
 lab包含一些试验性的项目，发布一个项目的基本流程是:
 
-1. 编写项目主页`xxx.md`，为了方便管理放到`/\_posts/LAB`目录中
-2. `xxx.md`的YAML信息如下：参考`/\_posts/LAB/template.md`
+1. 编写项目主页`xxx.md`，为了方便管理放到`/_posts/LAB`目录中
+2. `xxx.md`的YAML信息如下：参考`/_posts/LAB/template.md`
 > layout: post
-> category: LAB
+> title: 
+> category: lab
+> tags: 
 > name: 项目名称
-> thumbnail: 项目缩略图
-> progress: 当前进度
-> introduction: 项目简介
-3. 生成静态文件，lab页会列出所有`category`为`LAB`的post
+> web: 项目网址
+> thumbnail: 项目缩略图, /assets/img/lab/项目缩略图
+> progress: 当前进度(80%)
+> introduction: 项目简介，30字以内
+3. 生成静态文件，lab页会列出所有`category`为`lab`的post
 
 ##TODO
 

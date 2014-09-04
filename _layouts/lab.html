@@ -1,0 +1,77 @@
+---
+layout: page 
+title: Lab
+page: lab
+logo: lab
+---
+<div class="section">
+  <div class="page-title">
+    <ul class="navigation clearfix">
+      <li><a>leilux · Lab</a></li>
+      <li class="search"><input class='search-query' type="text" placeholder="搜索" />
+      </li>
+    </ul>
+  </div>
+
+  <div class="projects">
+    <ul class="thumbnails">
+    {% for proj in site.categories.lab %}
+      <li class='span3'>
+        <div class="thumbnail">
+          <div class="proj-thumbnail" onclick='loadapp("{{proj.web}}");'>
+            <img src="/assets/img/lab/{{ proj.thumbnail }}" alt="">
+          </div>
+          <div class="caption">
+            <div class="progress progress-success progress-striped"><div class="bar" style='width:{{ proj.progress }}'></div></div>
+            <h3><a href="{{proj.url}}">{{ proj.name }}</a></h3>
+            <p>{{ proj.introduction }}</p>
+          </div>
+        </div>
+      </li>
+   {% endfor %}
+   </ul>
+  </div><!-- /.project -->
+</div><!-- /.section -->
+
+<!-- app viewer -->
+<!-- app window -->
+<div class="app-modal-backdrop">
+  <div class='app-win'>
+    <div class="toolbar text-center">
+      <span class='bth close-btn icon-circle' onclick='exitapp(".app-win");'></span>
+      <span class="bth fullscreen-bth icon-expand" onclick='win_expand_compress(this);'></span>
+    <span id='win-title'></span>
+    </div>
+    <iframe src="" id='app-ifr' class='app-ifr' frameborder="0">
+    </iframe>
+  </div>
+</div>
+<script type="text/javascript">
+/* app viewer */
+function loadapp(appname) {
+  $('#app-ifr').attr({'src': appname});
+  $('#win-title').text(appname)
+  $('.app-modal-backdrop').fadeIn('fast');
+  $('body').css('overflow', 'hidden');
+}
+function exitapp(appwin) {
+  $('.app-modal-backdrop').fadeOut('fast');
+  $('body').css('overflow', 'auto');
+}
+function win_expand_compress(e) {
+  var $e = $(e);
+  var $app_win = $('.app-win');
+  var stat = $e.hasClass('icon-expand')? 'expand': 'compress';
+  switch (stat) {
+    case 'expand': 
+      $app_win.addClass('expand_action');
+      $e.removeClass('icon-expand').addClass('icon-compress');
+      break;
+    case 'compress':
+      $app_win.removeClass('expand_action')
+      $e.removeClass('icon-compress').addClass('icon-expand');
+      break;
+  }
+}
+</script>
+

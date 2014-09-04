@@ -1,4 +1,5 @@
 #jekyll
+_drafts/*
 _site/*
 assets/photo/*
 assets/css/icomoon/*

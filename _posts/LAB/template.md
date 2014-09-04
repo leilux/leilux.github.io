@@ -1,8 +1,12 @@
 ---
 layout: post
-category: LAB
-name: 
+title: 
+category: lab
+tags:
+
+name:
+web: http://
 thumbnail: 
-progress: 
-introduction: 
+progress: %
+introduction: 30字以内
 ---

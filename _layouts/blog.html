@@ -14,7 +14,7 @@ logo: quill
     </ul>
   </div>
   <ul class="article-list">
-  {% for post in site.posts %}
+    {% for post in site.posts %}{% if post.categories contains 'lab' %}{% else %}
     <li>
       <h2><a href="{{ post.url|replace: '+','%20' }}">{{ post.title }}</a></h2>
       <div class="article-info">
@@ -30,7 +30,7 @@ logo: quill
       </div>
       <div class="title-desc">{{ post.content | split:'<!--more-->'|first|strip_html}}<a href="{{ post.url|replace: '+','%20' }}"> ...</a></div>
     </li>
-  {% endfor %}
+    {% endif %}{% endfor %}
   </ul>
   <!-- paginator -->
 </div><!-- /.section -->
