@@ -14,7 +14,19 @@
     <!-- pages -->
     <div id="pageless-wrap">
       <h1 class="title">{{ page.title }}</h1>
-      <div class='article-info'>Post on <span class="icon-clock-o">{{ page.date|date:"%Y-%m-%d" }}</span></div>
+      <!-- <div class='article-info'>Post on <span class="icon-clock-o">{{ page.date|date:"%Y-%m-%d" }}</span></div> -->
+      <div class="article-info">
+        Post on <span class="icon-clock-o">{{ page.date|date:"%Y-%m-%d" }}</span>&nbsp;
+        <span class="icon-th-large"></span>
+        {% for category in page.categories %}
+          <span class='categories'>{{ category }}</span>
+        {% endfor %}&nbsp;
+        <span class="icon-tags"></span>
+        {% for tag in page.tags %}
+          <span>{{ tag }}, </span>
+        {% endfor %}
+      </div>
+
       <div class="content page" id="page1">
         <div class="ft"> 1 </div>
          {{ content }}

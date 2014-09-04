@@ -17,11 +17,20 @@ logo: quill
   {% for post in site.posts %}
     <li>
       <h2><a href="{{ post.url|replace: '+','%20' }}">{{ post.title }}</a></h2>
-      <div class="title-desc">{{ post.content | split:'<!--more-->'|first|strip_html}}<a href="{{ post.url|replace: '+','%20' }}"> ...</a></div>
       <div class="article-info">
-        <span class="icon-clock-o"></span><span class='time'>{{ post.date|date:"%Y-%m-%d" }}</span><span class='categories'>{{ post.categorire }}</span>
+        <span class="icon-clock-o"></span><span class='time'>{{ post.date|date:"%Y-%m-%d" }}</span>&nbsp;
+        <span class="icon-th-large"></span>
+        {% for category in post.categories %}
+          <span class='categories'>{{ category }}</span>
+        {% endfor %}&nbsp;
+        <span class="icon-tags"></span>
+        {% for tag in post.tags %}
+          <span>{{ tag }}, </span>
+        {% endfor %}
       </div>
+      <div class="title-desc">{{ post.content | split:'<!--more-->'|first|strip_html}}<a href="{{ post.url|replace: '+','%20' }}"> ...</a></div>
     </li>
   {% endfor %}
   </ul>
+  <!-- paginator -->
 </div><!-- /.section -->
