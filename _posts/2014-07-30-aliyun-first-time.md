@@ -1,7 +1,8 @@
 ---
 layout: post
 title: aliyun first time
-category: 
+category: tech
+tags: aliyun ECS OSS
 ---
 
 大致介绍了第一次接触阿里云需要了解的一些东西。包括有哪些产品、这些产品的功能、产品的收费标准、续费和升级的规则、这里介绍的产品有云服务器ECS和开放存储服务OSS。ECS相关的有云服务器的使用导航包括登录、磁盘等和一些linux操作指南。介绍了OSS的域名绑定。
