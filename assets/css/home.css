@@ -566,9 +566,6 @@ div.footer-text {
   margin-left: auto;
   margin-right: auto;
   background-color: #eaeaea;
-  background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
-  background-image: -moz-linear-gradient(#fafafa, #eaeaea);
-  background-image: linear-gradient(#fafafa, #eaeaea);
   background-repeat: repeat-x;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -597,6 +594,10 @@ div.footer-text {
 .close-btn:hover, .fullscreen-bth:hover {
   text-decoration: none;
   opacity: 0.8;
+}
+#win-title {
+  font-size: 13px;
+  color: gray;
 }
 
 .expand_action {
