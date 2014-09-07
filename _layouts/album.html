@@ -9,111 +9,110 @@ logo: camera
       <ul class="navigation clearfix">
         <li><a>leilux · Images</a></li>
         <li id='ver' class='layout-btn {{page.ver}}'><a href='./album-v.html'><span class='icon-layout'></span></a></li>
-        <li id='hor' class='layout-btn {{page.hor}}'><a href='./album-h.html'><span class='icon-layout2'></span></a></li>
-        <li><a href="{{page.return_url}}">{{page.return_text}}</a></li>
+        <!-- <li id='hor' class='layout-btn {{page.hor}}'><a href='./album-h.html'><span class='icon-layout2'></span></a></li> -->
         <li class="search"><input class='search-query' type="text" placeholder="搜索" />
         </li>
       </ul>
     </div>
+    <!-- image -->
+    <div class='image-group'>
+      <div class='box {%if page.ver %} ver {% else %} hor {% endif %}'>
+        <!-- photos -->
+      </div><!-- /.box -->
+      <img src="/assets/img/loading.gif" id='loading' alt="" style='display:none;margin:auto;left:0;right:0;'/>
+    </div><!-- /.image-list -->
+</div><!-- /.section -->
 
 <script type="text/javascript" src='/assets/js/jquery-1.9.1.min.js'></script>
-<script type="text/javascript" src='/assets/js/masonry.pkgd.min.js'></script>
+<script type="text/javascript" src="/assets/js/jquery.mustache.js"></script>
 <script type="text/javascript" src='/assets/js/imagesloaded.pkgd.min.js'></script>
-<script type="text/javascript" src='/assets/js/freewall.min.js'></script>
-<script type="text/template">
-  <div class='brick'><img src="{{src}}"></div>
+
+<script type="text/template" id='temp_photo'>
+  <div class='brick'><img src="{[{url}]}"></div>
 </script>
 
-<!-- image -->
-<div class='image-group'>
-  <div class='box {%if page.ver %} ver {% else %} hor {% endif %}'>
-  {{ content }}
-  </div><!-- /.box -->
-</div><!-- /.image-list -->
 <script type="text/javascript">
-  $(document).ready(function(){imagesLoaded($('.box')[0], function() {
-      var $container = $('.box');
-      var $v = {};
-      // hor
-      function generator_wall() {
-        var wall = new freewall('.box');
-        var options = {
-          selector: '.brick',
-          //draggable: true,
-          cellW: 'auto',
-          cellH: 150,
-          animate: false,
-          onResize: h_onresize,
-        };
-        wall.reset(options);
-        $v['wall'] = wall;
-        $v['options'] = options;
-      }
-      function h_onresize(e) {
-        $v.wall.fitWidth();
-        console.info('h');
-      }
-      function layout_h () {
-        $v.wall.fitWidth();
-      }
-      // layout ver
-      $('#ver').on('click', function(e) {
-        if ($v.wall) {
-          // reset style
-          $('.brick').each(function(i, el) {
-            $(el).css({width:'', height:''});
-          });
-          // unbindResize to wall
-          $v.wall.reset({
-            selector: '.brick',
-            //draggable: true,
-            cellW: 'auto',
-            cellH: 100,
-            animate: false,
-            onResize: function(){},
-          });
-        }
-        $container.removeClass('hor').addClass('ver1');
-        $('#hor').removeClass('active');
-        $('#ver').addClass('active');
-        msnry.bindResize();
-        if ($v.wall) {
-          setTimeout(function() {
-            layout_v1();
-          }, 600);
-        }
-        else {
-          layout_v1();
-        }
-      });
+function add_page(data) {
+    // waiting animation
+    $('#loading').css({'display': 'block'});
+    var $data = $(data.splice(0, interval)); // for debug
+    var elems = [];
+    $data.each(function(i, e) {
+        var $elem = $('#temp_photo').mustache(e);
+        $('.box').append($elem);
+        elems.push($elem[0]);
+    });
+    imagesLoaded($('.box')[0], function() {
+        var msnry = new Masonry($('.box')[0], {
+            itemSelector: '.brick',
+            transitionDuration: 0,
+            //columnWidth: 200,
+        });
+        // next
+        lazy_load(data);
+        $('#loading').css({'display': 'none'});
+    });
+}
+// lazy loading
+function lazy_load(data) {
+    if (data.length == 0) return;
+    // next
+    if ($(window).height() >= $(document).height())
+        // bottom_less_handler
+        add_page(data);
+    else
+        // scroll_bottom_handler
+        $(window).on('scroll', {data:data}, pageless_scroll_handler);
+}
 
-      // layout hor
-      $('#hor').on('click', function(e) {
-        msnry.unbindResize();
-        $container.removeClass('ver1').addClass('hor');
-        if ($v.wall) {
-          $v.wall.reset($v.options);
-          layout_h();
-        }
-        else {
-          generator_wall();
-          layout_h();
-        }
-        $('#ver').removeClass('active');
-        $('#hor').addClass('active');
-      });
-      // ver1 
-      var msnry = new Masonry($container[0], {
-        itemSelector: '.brick',
-        transitionDuration: 0,
-        //columnWidth: 200,
-      });
-      function layout_v1 () {
-          msnry.layout();
-      }
-      layout_v1();
-  }); // imagesLoaded
-  });// document on ready
+function pageless_scroll_handler(event) {
+    if ($(document).scrollTop()+$(window).height() > $(document).height() - 50) {
+        $(window).off('scroll', pageless_scroll_handler);
+        add_page(event.data.data);
+    }
+}
+
+var album_name = location.hash.substr(1);
+
+$('a[href^="./album"]').each(function(i,e) {
+    var $e = $(e);
+    $e.attr('href', $e.attr('href')+'#'+album_name);
+});
+
+var interval = 30;
+$.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: '/assets/json/album/' + album_name + '.json',
+    success: function(data) {
+        //var $data = $(data.splice(0, interval)); // for debug
+        //$data.each(function(i, e) {
+        //    $('.box').append($('#temp_photo').mustache(e));
+        //});
+
+        var $container = $('.box');
+        // ver 
+
+
+        add_page(data);
+
+        // layout ver
+        $('#ver').on('click', function(e) {
+            var msnry = new Masonry($('.box')[0], {
+                itemSelector: '.brick',
+                transitionDuration: 0,
+                //columnWidth: 200,
+            });
+            //msnry.layout();
+        });
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+    },
+})
+
+
 </script>
-    
-</div><!-- /.section -->
+
+<script type="text/javascript" src='/assets/js/masonry.pkgd.min.js'></script>
+<script type="text/javascript" src='/assets/js/freewall.min.js'></script>

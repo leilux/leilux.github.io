@@ -1,13 +1,34 @@
 ---
-layout: album
-title: Album
+layout: page 
 page: image
-ver: active
-return_text: 回旧版
-return_url: ./album-v.html
+logo: camera
 ---
 
+<div class="section">
+    <div class="page-title">
+      <ul class="navigation clearfix">
+        <li><a>leilux · Images</a></li>
+        <li id='ver' class='layout-btn {{page.ver}}'><a href='./album-v.html'><span class='icon-layout'></span></a></li>
+        <li id='hor' class='layout-btn {{page.hor}}'><a href='./album-h.html'><span class='icon-layout2'></span></a></li>
+        <li><a href="{{page.return_url}}">{{page.return_text}}</a></li>
+        <li class="search"><input class='search-query' type="text" placeholder="搜索" />
+        </li>
+      </ul>
+    </div>
 
+<script type="text/javascript" src='/assets/js/masonry.pkgd.min.js'></script>
+<script type="text/javascript" src='/assets/js/imagesloaded.pkgd.min.js'></script>
+<script type="text/javascript" src='/assets/js/freewall.min.js'></script>
+<script type="text/template">
+  <div class='brick'><img src="{{src}}"></div>
+</script>
+
+<!-- image -->
+<div class='image-group'>
+  <div class='box {%if page.ver %} ver {% else %} hor {% endif %}'>
+  {{ content }}
+  </div><!-- /.box -->
+</div><!-- /.image-list -->
 <script type="text/javascript">
   $(document).ready(function(){imagesLoaded($('.box')[0], function() {
       var $container = $('.box');
@@ -50,9 +71,8 @@ return_url: ./album-v.html
             animate: false,
             onResize: function(){},
           });
-          return false;
         }
-        $container.removeClass('hor').addClass('ver');
+        $container.removeClass('hor').addClass('ver1');
         $('#hor').removeClass('active');
         $('#ver').addClass('active');
         msnry.bindResize();
@@ -69,7 +89,7 @@ return_url: ./album-v.html
       // layout hor
       $('#hor').on('click', function(e) {
         msnry.unbindResize();
-        $container.removeClass('ver').addClass('hor');
+        $container.removeClass('ver1').addClass('hor');
         if ($v.wall) {
           $v.wall.reset($v.options);
           layout_h();
@@ -80,9 +100,8 @@ return_url: ./album-v.html
         }
         $('#ver').removeClass('active');
         $('#hor').addClass('active');
-        return false;
       });
-      // ver 
+      // ver1 
       var msnry = new Masonry($container[0], {
         itemSelector: '.brick',
         transitionDuration: 0,
@@ -95,3 +114,5 @@ return_url: ./album-v.html
   }); // imagesLoaded
   });// document on ready
 </script>
+    
+</div><!-- /.section -->

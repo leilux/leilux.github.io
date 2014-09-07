@@ -1,0 +1,99 @@
+---
+layout: album
+title: Album
+page: image
+ver: active
+return_text: 回旧版
+return_url: ./album-v.html
+---
+
+
+<!-- Pinterest & Google Image Search layout -->
+<script type="text/javascript">
+  function layout() {
+      var $container = $('.box');
+      var $v = {};
+      // hor
+      function generator_wall() {
+        var wall = new freewall('.box');
+        var options = {
+          selector: '.brick',
+          //draggable: true,
+          cellW: 'auto',
+          cellH: 150,
+          animate: false,
+          onResize: h_onresize,
+        };
+        wall.reset(options);
+        $v['wall'] = wall;
+        $v['options'] = options;
+      }
+      function h_onresize(e) {
+        $v.wall.fitWidth();
+        console.info('h');
+      }
+      function layout_h () {
+        $v.wall.fitWidth();
+      }
+      // layout ver
+      $('#ver').on('click', function(e) {
+        if ($v.wall) {
+          // reset style
+          $('.brick').each(function(i, el) {
+            $(el).css({width:'', height:''});
+          });
+          // unbindResize to wall
+          $v.wall.reset({
+            selector: '.brick',
+            //draggable: true,
+            cellW: 'auto',
+            cellH: 100,
+            animate: false,
+            onResize: function(){},
+          });
+          return false;
+        }
+        $container.removeClass('hor').addClass('ver');
+        $('#hor').removeClass('active');
+        $('#ver').addClass('active');
+        msnry.bindResize();
+        if ($v.wall) {
+          setTimeout(function() {
+            layout_v1();
+          }, 600);
+        }
+        else {
+          layout_v1();
+        }
+      });
+
+      // layout hor
+      $('#hor').on('click', function(e) {
+        msnry.unbindResize();
+        $container.removeClass('ver').addClass('hor');
+        if ($v.wall) {
+          $v.wall.reset($v.options);
+          layout_h();
+        }
+        else {
+          generator_wall();
+          layout_h();
+        }
+        $('#ver').removeClass('active');
+        $('#hor').addClass('active');
+        return false;
+      });
+      // ver 
+      var msnry = new Masonry($container[0], {
+        itemSelector: '.brick',
+        transitionDuration: 0,
+        //columnWidth: 200,
+      });
+      function layout_v1 () {
+          msnry.layout();
+      }
+      layout_v1();
+  }
+//  $(document).ready(function(){imagesLoaded($('.box')[0], layout); // imagesLoaded
+//  });// document on ready
+</script>

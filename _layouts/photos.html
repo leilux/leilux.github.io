@@ -1,0 +1,55 @@
+---
+layout: page 
+page: image
+logo: camera
+---
+
+<div class="section">
+    <div class="page-title">
+      <ul class="navigation clearfix">
+        <li><a>leilux · Images</a></li>
+        <li id='ver' class='layout-btn {{page.ver}}'><a href='./album-v.html'><span class='icon-layout'></span></a></li>
+        <li id='hor' class='layout-btn {{page.hor}}'><a href='./album-h.html'><span class='icon-layout2'></span></a></li>
+        <li class="search"><input class='search-query' type="text" placeholder="搜索" />
+        </li>
+      </ul>
+    </div><!-- /.page-title -->
+    <div class="projects">
+      <ul class="thumbnails">
+        <!-- all albums -->
+      </ul>
+    </div>
+</div><!-- /.section -->
+
+<script type="text/template" id="album">
+  <li class="span3">
+    <div class="thumbnail">
+      <div class="proj-thumbnail">
+        <img src="{[{cover}]}" alt="" />
+      </div>
+      <div class="caption">
+        <h3><a href="/photos/album-v.html#{[{name}]}">{[{name}]}</a></h3>
+      </div>
+    </div>
+  </li>
+</script>
+
+<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.mustache.js"></script>
+
+<script type="text/javascript">
+$.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: '/assets/json/albums.json',
+    success: function(data) {
+        $(data).each(function(i, e) {
+            e.cover = e.cover || '/assets/img/photo_album.png';
+            $('.thumbnails').append($('#album').mustache(e));
+        });
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+    },
+})
+</script>
