@@ -29,6 +29,12 @@ body {
   margin-left: auto;
   width: 700px;
 }
+.article {
+  color: #5a5a5a;
+}
+.article h1,h2,h3,h4 {
+  color: #5a5a5a;
+}
 .content img {
   display: block;
   max-width: 100%;
