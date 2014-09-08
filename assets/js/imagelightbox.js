@@ -290,6 +290,13 @@
 			if( !isTargetValid( this ) ) return true;
 			targets = targets.add( $( this ) );
 		});
+        // add by leilux
+        this.appendTarget = function(appends) {
+          appends.each(function() {
+			    if( !isTargetValid( this ) ) return true;
+			    targets = targets.add( $( this ) );
+		    });
+        };
 
 		this.switchImageLightbox = function( index )
 		{
