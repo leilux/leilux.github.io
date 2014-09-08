@@ -44,7 +44,7 @@ $('a[href^="./album"]').each(function(i,e) {
 
 var imgsqueue = $('a[data-imagelightbox="a"]').imageLightbox({
     quitOnEnd:   true,
-    animationsSpeed: 0,
+    animationsSpeed: -90,
 	onStart: 	 function() { overlayOn(); },
     onEnd:	 	 function(e) { 
         overlayOff(); activityIndicatorOff(); 
