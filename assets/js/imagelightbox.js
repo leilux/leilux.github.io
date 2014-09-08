@@ -86,8 +86,8 @@
 			{
 				if( !image.length ) return true;
 
-				var screenWidth	 = $( window ).width() * 0.8,
-					screenHeight = $( window ).height() * 0.9,
+				var screenWidth	 = $( window ).width() - 5,
+					screenHeight = $( window ).height() -5,
 					tmpImage 	 = new Image();
 
 				tmpImage.src	= image.attr( 'src' );
@@ -226,7 +226,7 @@
 						}
 					});
 
-				}, options.animationSpeed + 100 );
+				}, options.animationSpeed + 10 );
 			},
 
 			removeImage = function()

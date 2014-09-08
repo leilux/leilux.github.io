@@ -44,7 +44,7 @@ $('a[href^="./album"]').each(function(i,e) {
 
 var imgsqueue = $('a[data-imagelightbox="a"]').imageLightbox({
     quitOnEnd:   true,
-    animationsSpeed: -90,
+    animationsSpeed: 10,
 	onStart: 	 function() { overlayOn(); },
     onEnd:	 	 function(e) { 
         overlayOff(); activityIndicatorOff(); 
@@ -58,6 +58,7 @@ function add_page(data) {
     // waiting animation
     $('#loading').css({'display': 'block'});
     var $data = $(data.splice(0, interval)); // for debug
+    if ($data.length == 0) return false;
     var elems = [];
     $data.each(function(i, e) {
         var $elem = $('#temp_photo').mustache(e);
