@@ -48,7 +48,8 @@ var imgsqueue = $('a[data-imagelightbox="a"]').imageLightbox({
 	onStart: 	 function() { overlayOn(); },
     onEnd:	 	 function(e) { 
         overlayOff(); activityIndicatorOff(); 
-        $(document).scrollTop($('img[src="'+e.src+'"]').offset().top-20);
+        //$(document).scrollTop($('img[src="'+e.src+'"]').offset().top-20);
+        $('html,body').animate({scrollTop:$('img[src="'+e.src+'"]').offset().top-20});
     },
 	onLoadStart: function() { activityIndicatorOn(); },
 	onLoadEnd:	 function() { activityIndicatorOff(); },
