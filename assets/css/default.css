@@ -75,7 +75,7 @@ pre ol{margin-left:25px;list-style-type:decimal;}
     position: fixed;
     top: 0;
     left: 0;
-    width: 30%;
+    width: 23%;
     height: 100%;
     max-width: 500px;
     background:#000;
@@ -84,7 +84,7 @@ pre ol{margin-left:25px;list-style-type:decimal;}
     background-position:50% 50%;
 }
 .index-content .section { 
-    margin-left:30%; 
+    margin-left:23%; 
   /*padding-top:80px;*/ 
     padding-right:15%;
 }
