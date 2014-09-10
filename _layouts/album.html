@@ -47,7 +47,7 @@ var imgsqueue = $('a[data-imagelightbox="a"]').imageLightbox({
     onEnd:	 	 function(e) { 
         overlayOff(); activityIndicatorOff(); 
         //$(document).scrollTop($('img[src="'+e.src+'"]').offset().top-20);
-        $('html,body').animate({scrollTop:$('img[src="'+e.src+'@200w_30Q_1x.jpg"]').offset().top-20});
+        $('html,body').animate({scrollTop:$('img[src="'+e.src+'@200w_70Q_1x.jpg"]').offset().top-20});
     },
 	onLoadStart: function() { activityIndicatorOn(); },
 	onLoadEnd:	 function() { activityIndicatorOff(); },
