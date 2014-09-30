@@ -1,107 +1,16 @@
 ---
-layout: page 
+layout: album
+title: Album-v
 page: image
-logo: camera
+ver: active
+return_text: 回新版
+return_url: ./album.html
 ---
 
-<div class="section">
-    <div class="page-title">
-      <ul class="navigation clearfix">
-        <li><a>leilux · Images</a></li>
-        <li id='ver' class='layout-btn {{page.ver}}'><a href='./album-v.html'><span class='icon-layout'></span></a></li>
-        <li id='hor' class='layout-btn {{page.hor}}'><a href='./album-h.html'><span class='icon-layout2'></span></a></li>
-        <li><a href="{{page.return_url}}">{{page.return_text}}</a></li>
-        <li class="search"><input class='search-query' type="text" placeholder="搜索" />
-        </li>
-      </ul>
-    </div>
-
-<script type="text/javascript" src='/assets/js/masonry.pkgd.min.js'></script>
-<script type="text/javascript" src='/assets/js/imagesloaded.pkgd.min.js'></script>
-<script type="text/javascript" src='/assets/js/freewall.min.js'></script>
-<script type="text/template">
-  <div class='brick'><img src="{{src}}"></div>
-</script>
-
-<!-- image -->
-<div class='image-group'>
-  <div class='box {%if page.ver %} ver {% else %} hor {% endif %}'>
-  {{ content }}
-  </div><!-- /.box -->
-</div><!-- /.image-list -->
-<script type="text/javascript">
+//<!-- Pinterest layout -->
   $(document).ready(function(){imagesLoaded($('.box')[0], function() {
       var $container = $('.box');
-      var $v = {};
-      // hor
-      function generator_wall() {
-        var wall = new freewall('.box');
-        var options = {
-          selector: '.brick',
-          //draggable: true,
-          cellW: 'auto',
-          cellH: 150,
-          animate: false,
-          onResize: h_onresize,
-        };
-        wall.reset(options);
-        $v['wall'] = wall;
-        $v['options'] = options;
-      }
-      function h_onresize(e) {
-        $v.wall.fitWidth();
-        console.info('h');
-      }
-      function layout_h () {
-        $v.wall.fitWidth();
-      }
-      // layout ver
-      $('#ver').on('click', function(e) {
-        if ($v.wall) {
-          // reset style
-          $('.brick').each(function(i, el) {
-            $(el).css({width:'', height:''});
-          });
-          // unbindResize to wall
-          $v.wall.reset({
-            selector: '.brick',
-            //draggable: true,
-            cellW: 'auto',
-            cellH: 100,
-            animate: false,
-            onResize: function(){},
-          });
-        }
-        $container.removeClass('hor').addClass('ver1');
-        $('#hor').removeClass('active');
-        $('#ver').addClass('active');
-        msnry.bindResize();
-        if ($v.wall) {
-          setTimeout(function() {
-            layout_v1();
-          }, 600);
-        }
-        else {
-          layout_v1();
-        }
-      });
-
-      // layout hor
-      $('#hor').on('click', function(e) {
-        msnry.unbindResize();
-        $container.removeClass('ver1').addClass('hor');
-        if ($v.wall) {
-          $v.wall.reset($v.options);
-          layout_h();
-        }
-        else {
-          generator_wall();
-          layout_h();
-        }
-        $('#ver').removeClass('active');
-        $('#hor').addClass('active');
-      });
-      // ver1 
+      // ver 
       var msnry = new Masonry($container[0], {
         itemSelector: '.brick',
         transitionDuration: 0,
@@ -110,9 +19,10 @@ logo: camera
       function layout_v1 () {
           msnry.layout();
       }
-      layout_v1();
-  }); // imagesLoaded
+      // layout ver
+      $('#ver').on('click', function(e) {
+        layout_v1();
+      });
+
+    }); // imagesLoaded
   });// document on ready
-</script>
-    
-</div><!-- /.section -->
