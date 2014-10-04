@@ -8,7 +8,7 @@ logo: camera
     <div class="page-title">
       <ul class="navigation clearfix">
         <li><a>leilux · Images</a></li>
-        <li id='ver' class='layout-btn {{page.ver}}'><a href='./album-v.html'><span class='icon-layout'></span></a></li>
+        <li id='ver' class='layout-btn {{page.ver}}'><a href='.'><span class='icon-layout'></span></a></li>
         <!-- <li id='hor' class='layout-btn {{page.hor}}'><a href='./album-h.html'><span class='icon-layout2'></span></a></li> -->
       </ul>
     </div>
@@ -35,7 +35,7 @@ logo: camera
 var interval = 20;
 var album_name = location.hash.substr(1);
 
-$('a[href^="./album"]').each(function(i,e) {
+$('a[href^="./album"],.layout-btn>a').each(function(i,e) {
     var $e = $(e);
     $e.attr('href', $e.attr('href')+'#'+album_name);
 });
@@ -112,6 +112,7 @@ $.ajax({
                 //columnWidth: 200,
             });
             //msnry.layout();
+            return false;
         });
     },
     error: function(jqXHR, textStatus, errorThrown) {
