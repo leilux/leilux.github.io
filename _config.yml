@@ -10,3 +10,11 @@ excerpt_separator: <!--more-->
 # global vars
 title: Leilux
 url: xpx.droprest.com
+
+# components
+CP: 
+  # setting comments
+  comments:
+    provider: duoshuo
+    duoshuo:
+      short_name: xpx

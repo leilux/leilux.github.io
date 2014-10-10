@@ -1,0 +1,8 @@
+{% if site.CP.comments.provider and page.comments != false %}
+
+{% case site.CP.comments.provider %}
+{% when "duoshuo" %}
+  {% include CP/comments-providers/duoshuo %}
+{% endcase %}
+
+{% endif %}
