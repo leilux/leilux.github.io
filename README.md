@@ -29,3 +29,7 @@ lab包含一些试验性的项目，发布一个项目的基本流程是:
 
 * 能整合stackedit吗？这真是我用过的最好的md编辑器了。
 * TOC
+* [网易云音乐插件](http://music.163.com/#/outchain/0/37650114/m/use)
+```html
+<embed src="http://music.163.com/style/swf/widget.swf?sid=37650114&type=0&auto=0&width=310&height=430" width="330" height="450"  allowNetworking="all"></embed>
+```
