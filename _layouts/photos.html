@@ -5,49 +5,125 @@ page: image
 logo: camera
 ---
 
-<style type="text/css">body{background-color: #e5e5e5;}</style>
+<style type="text/css">
+  .hor img {
+    height: 200px;
+  }
+  .box > .brick {
+    margin: 15px;
+  }
+</style>
+<script type="text/template" id="album">
+    <div class="brick">
+      <div class="proj-thumbnail">
+        <!-- <img src="{[{cover}]}" alt="" />-->
+        <img src="http://img3.url2io.com/blog-photos_cover/{[{name}]}.png@200w_70Q_1x.jpg" alt="" />
+<a href="/photos/album/#{[{name}]}">{[{name}]}</a>
+      </div>
+    </div>
+</script>
+
 <div class="section">
     <div class="page-title">
       <ul class="navigation clearfix">
         <li><a>leilux · Images</a></li>
-      </ul>
-    </div><!-- /.page-title -->
-    <div class="projects">
-      <ul class="thumbnails">
-        <!-- all albums -->
+        <li id='ver' class='layout-btn {{page.ver}}'><a href='.'><span class='icon-layout'></span></a></li>
+        <!-- <li id='hor' class='layout-btn {{page.hor}}'><a href='./album-h.html'><span class='icon-layout2'></span></a></li> -->
       </ul>
     </div>
+    <!-- image -->
+    <div class='image-group'>
+      <div class='box {%if page.ver %} ver {% else %} hor {% endif %}'>
+        <!-- photos -->
+      </div><!-- /.box -->
+      <img src="/assets/img/loading.gif" id='loading' alt="" style='display:none;margin:auto;left:0;right:0;'/>
+    </div><!-- /.image-list -->
 </div><!-- /.section -->
 
-<script type="text/template" id="album">
-  <li class="span3">
-    <div class="thumbnail">
-      <div class="proj-thumbnail">
-        <img src="{[{cover}]}" alt="" />
-      </div>
-      <div class="caption">
-        <h3><a href="/photos/album/#{[{name}]}">{[{name}]}</a></h3>
-      </div>
-    </div>
-  </li>
+<script type="text/javascript" src='/assets/js/jquery-1.9.1.min.js'></script>
+<script type="text/javascript" src="/assets/js/jquery.mustache.js"></script>
+<script type="text/javascript" src='/assets/js/imagesloaded.pkgd.min.js'></script>
+
+<script type="text/template" id='temp_photo'>
+  <div class='brick'><a href="{[{url}]}" data-imagelightbox='a'><img src="{[{url}]}@200w_70Q_1x.jpg"></a></div>
 </script>
 
-<script type="text/javascript" src="/assets/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery.mustache.js"></script>
-
 <script type="text/javascript">
+
+var interval = 20;
+var album_name = location.hash.substr(1);
+
+$('a[href^="./album"],.layout-btn>a').each(function(i,e) {
+    var $e = $(e);
+    $e.attr('href', $e.attr('href')+'#'+album_name);
+});
+
+function add_page(data) {
+    // waiting animation
+    $('#loading').css({'display': 'block'});
+    var $data = $(data.splice(0, interval)); // for debug
+    if ($data.length == 0) return false;
+    var elems = [];
+    $data.each(function(i, e) {
+        var $elem = $('#album').mustache(e);
+        $('.box').append($elem);
+        elems.push($elem[0]);
+    });
+
+    imagesLoaded($('.box')[0], function() {
+        var msnry = new Masonry($('.box')[0], {
+            itemSelector: '.brick',
+            transitionDuration: 0,
+            //columnWidth: 200,
+        });
+        // next
+        lazy_load(data);
+        $('#loading').css({'display': 'none'});
+    });
+}
+// lazy loading
+function lazy_load(data) {
+    if (data.length == 0) return;
+    // next
+    if ($(window).height() >= $(document).height())
+        // bottom_less_handler
+        add_page(data);
+    else
+        // scroll_bottom_handler
+        $(window).on('scroll', {data:data}, pageless_scroll_handler);
+}
+
+function pageless_scroll_handler(event) {
+    if ($(document).scrollTop()+$(window).height() > $(document).height() - 200) {
+        $(window).off('scroll', pageless_scroll_handler);
+        add_page(event.data.data);
+    }
+}
+
 $.ajax({
     type: 'GET',
     dataType: 'json',
     url: '/assets/json/albums.json',
     success: function(data) {
-        $(data).each(function(i, e) {
-            e.cover = e.cover || '/assets/img/photo_album.png';
-            $('.thumbnails').append($('#album').mustache(e));
+        add_page(data);
+
+        // layout ver
+        $('#ver').on('click', function(e) {
+            var msnry = new Masonry($('.box')[0], {
+                itemSelector: '.brick',
+                transitionDuration: 0,
+                //columnWidth: 200,
+            });
+            //msnry.layout();
+            return false;
         });
     },
     error: function(jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
     },
 })
+
+
 </script>
+
+<script type="text/javascript" src='/assets/js/masonry.pkgd.min.js'></script>
